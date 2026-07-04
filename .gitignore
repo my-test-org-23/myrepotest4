@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+server/dist/
+server/public/
+web/dist/
+*.tsbuildinfo
+
+# Runtime data (SQLite database + WAL files)
+server/data/
+*.db
+*.db-shm
+*.db-wal
+
+# Env
+.env
+.env.local
+
+# Logs / OS
+*.log
+.DS_Store

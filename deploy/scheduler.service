@@ -1,0 +1,32 @@
+# systemd unit for the availability scheduler API (which also serves the SPA).
+# Install to /etc/systemd/system/scheduler.service, then:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now scheduler
+#
+# Adjust User, WorkingDirectory and the codes below to your VPS.
+
+[Unit]
+Description=Event Availability Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/scheduler/server
+ExecStart=/usr/bin/node dist/index.js
+Restart=on-failure
+RestartSec=3
+
+# --- Configuration (edit these) ---
+Environment=PORT=4000
+Environment=ACCESS_CODE=JULY2026
+Environment=ADMIN_CODE=ADMIN2026
+Environment=EVENT_TITLE=Team Get-Together
+Environment=DB_PATH=/opt/scheduler/data/scheduler.db
+Environment=SLOT_START_HOUR=7
+Environment=SLOT_END_HOUR=23
+# Same-origin in production (Nginx proxies /api to this port), so "*" is fine.
+Environment=CORS_ORIGIN=*
+
+[Install]
+WantedBy=multi-user.target
