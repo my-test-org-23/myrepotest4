@@ -14,7 +14,7 @@ export default function AdminDashboard() {
     api
       .adminSummary()
       .then((r) => alive && setData(r))
-      .catch((e) => alive && setError(e instanceof Error ? e.message : 'Failed to load.'))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : 'No se pudo cargar.'))
       .finally(() => alive && setLoading(false));
     return () => {
       alive = false;
@@ -24,29 +24,29 @@ export default function AdminDashboard() {
   return (
     <div className="admin">
       <section className="admin-section">
-        <h2 className="section-title">Suggested times</h2>
+        <h2 className="section-title">Horarios sugeridos</h2>
         <Results />
       </section>
 
       <section className="admin-section">
-        <h2 className="section-title">Participants</h2>
-        {loading && <p className="muted">Loading…</p>}
+        <h2 className="section-title">Participantes</h2>
+        {loading && <p className="muted">Cargando…</p>}
         {error && <p className="error-text">{error}</p>}
         {data && (
           <>
             <div className="stat-row">
               <div className="stat card">
                 <span className="stat-num">{data.totalUsers}</span>
-                <span className="stat-label">people signed in</span>
+                <span className="stat-label">personas registradas</span>
               </div>
               <div className="stat card">
                 <span className="stat-num">{data.totalSlots}</span>
-                <span className="stat-label">total slots picked</span>
+                <span className="stat-label">horarios elegidos en total</span>
               </div>
             </div>
 
             {data.users.length === 0 && (
-              <p className="muted">Nobody has signed in yet.</p>
+              <p className="muted">Nadie se ha registrado todavía.</p>
             )}
 
             <ul className="admin-users">
@@ -55,12 +55,12 @@ export default function AdminDashboard() {
                   <div className="admin-user-head">
                     <span className="admin-user-name">{u.name}</span>
                     <span className="admin-user-meta">
-                      {u.totalDays} day{u.totalDays === 1 ? '' : 's'} ·{' '}
-                      {u.totalSlots} slot{u.totalSlots === 1 ? '' : 's'}
+                      {u.totalDays} día{u.totalDays === 1 ? '' : 's'} ·{' '}
+                      {u.totalSlots} horario{u.totalSlots === 1 ? '' : 's'}
                     </span>
                   </div>
                   {u.slots.length === 0 ? (
-                    <p className="muted small">No availability set.</p>
+                    <p className="muted small">Sin disponibilidad definida.</p>
                   ) : (
                     <div className="admin-user-days">
                       {groupByDate(u.slots).map(([date, hrs]) => (

@@ -47,7 +47,7 @@ api.post('/auth', (req: Request, res: Response) => {
   const name = String(req.body?.name ?? '').trim();
 
   if (!code) {
-    res.status(400).json({ error: 'A code is required.' });
+    res.status(400).json({ error: 'Se requiere un código.' });
     return;
   }
 
@@ -62,11 +62,11 @@ api.post('/auth', (req: Request, res: Response) => {
   // Participant code path — requires a name.
   if (code === config.accessCode) {
     if (!name) {
-      res.status(400).json({ error: 'Please enter your name.', needsName: true });
+      res.status(400).json({ error: 'Por favor ingresa tu nombre.', needsName: true });
       return;
     }
     if (name.length > 60) {
-      res.status(400).json({ error: 'Name is too long (max 60 characters).' });
+      res.status(400).json({ error: 'El nombre es demasiado largo (máximo 60 caracteres).' });
       return;
     }
 
@@ -82,7 +82,7 @@ api.post('/auth', (req: Request, res: Response) => {
     return;
   }
 
-  res.status(401).json({ error: 'That code is not valid.' });
+  res.status(401).json({ error: 'Ese código no es válido.' });
 });
 
 api.post('/logout', (req: Request, res: Response) => {
@@ -93,7 +93,7 @@ api.post('/logout', (req: Request, res: Response) => {
 /** Returns who the current token belongs to (used to restore sessions). */
 api.get('/me', (req: Request, res: Response) => {
   if (!req.auth) {
-    res.status(401).json({ error: 'Not signed in.' });
+    res.status(401).json({ error: 'No has iniciado sesión.' });
     return;
   }
   res.json({
@@ -127,11 +127,11 @@ api.put('/availability/:date', requireUser, (req: Request, res: Response) => {
   const hours: unknown = req.body?.hours;
 
   if (!isValidDate(date)) {
-    res.status(400).json({ error: 'Date is outside the event month.' });
+    res.status(400).json({ error: 'La fecha está fuera del mes del evento.' });
     return;
   }
   if (!Array.isArray(hours) || !hours.every((h) => isValidHour(h))) {
-    res.status(400).json({ error: 'Invalid hours.' });
+    res.status(400).json({ error: 'Horas no válidas.' });
     return;
   }
 
@@ -158,7 +158,7 @@ api.put('/availability/:date', requireUser, (req: Request, res: Response) => {
  */
 api.get('/overlap', (req: Request, res: Response) => {
   if (!req.auth) {
-    res.status(401).json({ error: 'Not signed in.' });
+    res.status(401).json({ error: 'No has iniciado sesión.' });
     return;
   }
 

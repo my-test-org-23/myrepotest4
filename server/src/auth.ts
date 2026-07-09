@@ -62,7 +62,7 @@ export function attachAuth(req: Request, _res: Response, next: NextFunction): vo
 /** Requires any signed-in participant. */
 export function requireUser(req: Request, res: Response, next: NextFunction): void {
   if (!req.auth || req.auth.userId == null) {
-    res.status(401).json({ error: 'Not signed in.' });
+    res.status(401).json({ error: 'No has iniciado sesión.' });
     return;
   }
   next();
@@ -71,7 +71,7 @@ export function requireUser(req: Request, res: Response, next: NextFunction): vo
 /** Requires an admin session. */
 export function requireAdmin(req: Request, res: Response, next: NextFunction): void {
   if (!req.auth || !req.auth.isAdmin) {
-    res.status(403).json({ error: 'Admin access required.' });
+    res.status(403).json({ error: 'Se requiere acceso de organizador.' });
     return;
   }
   next();

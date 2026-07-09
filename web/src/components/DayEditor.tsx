@@ -47,7 +47,7 @@ export default function DayEditor({ date, hours, initialSelected, onSaved, onBac
       onSaved(date, list);
       onBack();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not save.');
+      setError(err instanceof Error ? err.message : 'No se pudo guardar.');
     } finally {
       setSaving(false);
     }
@@ -57,21 +57,21 @@ export default function DayEditor({ date, hours, initialSelected, onSaved, onBac
     <div className="day-editor">
       <div className="day-editor-head">
         <button type="button" className="btn btn-ghost btn-back" onClick={onBack}>
-          ← Back
+          ← Volver
         </button>
         <h2 className="day-editor-title">{formatFullDate(date)}</h2>
       </div>
 
-      <p className="day-editor-sub">Tap every hour you could meet.</p>
+      <p className="day-editor-sub">Toca cada hora en la que podrías reunirte.</p>
 
       <div className="slot-toolbar">
         <button type="button" className="btn btn-small" onClick={selectAll}>
-          Select all
+          Seleccionar todo
         </button>
         <button type="button" className="btn btn-small" onClick={clearAll}>
-          Clear
+          Limpiar
         </button>
-        <span className="slot-count">{selected.size} selected</span>
+        <span className="slot-count">{selected.size} seleccionadas</span>
       </div>
 
       <div className="slot-grid">
@@ -100,7 +100,7 @@ export default function DayEditor({ date, hours, initialSelected, onSaved, onBac
           onClick={save}
           disabled={saving}
         >
-          {saving ? 'Saving…' : 'Save this day'}
+          {saving ? 'Guardando…' : 'Guardar este día'}
         </button>
       </div>
     </div>

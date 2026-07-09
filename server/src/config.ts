@@ -24,7 +24,7 @@ export const config = {
 
   // The single event everyone is scheduling around.
   event: {
-    title: process.env.EVENT_TITLE || 'Team Get-Together',
+    title: process.env.EVENT_TITLE || 'Reunión del equipo',
     // The month we collect availability for. Fixed to July 2026 per spec.
     year: 2026,
     // 1-based month (7 = July).

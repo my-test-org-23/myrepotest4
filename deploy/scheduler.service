@@ -21,7 +21,7 @@ RestartSec=3
 Environment=PORT=4000
 Environment=ACCESS_CODE=JULY2026
 Environment=ADMIN_CODE=ADMIN2026
-Environment=EVENT_TITLE=Team Get-Together
+Environment=EVENT_TITLE=Reunión del equipo
 Environment=DB_PATH=/opt/scheduler/data/scheduler.db
 Environment=SLOT_START_HOUR=7
 Environment=SLOT_END_HOUR=23

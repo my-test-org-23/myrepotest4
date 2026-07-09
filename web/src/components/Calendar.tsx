@@ -38,8 +38,8 @@ export default function Calendar({ dates, availability, onSelectDay }: Props) {
               type="button"
               className={`day-cell${hasAvail ? ' day-has-avail' : ''}`}
               onClick={() => onSelectDay(date)}
-              aria-label={`July ${dayOfMonth(date)}${
-                hasAvail ? `, ${count} slot${count === 1 ? '' : 's'} selected` : ''
+              aria-label={`${dayOfMonth(date)} de julio${
+                hasAvail ? `, ${count} horario${count === 1 ? '' : 's'} seleccionado${count === 1 ? '' : 's'}` : ''
               }`}
             >
               <span className="day-number">{dayOfMonth(date)}</span>
@@ -50,8 +50,8 @@ export default function Calendar({ dates, availability, onSelectDay }: Props) {
       </div>
 
       <p className="calendar-legend">
-        Tap a day to set the hours you’re free. A number shows how many hours you
-        picked.
+        Toca un día para indicar las horas en que estás disponible. El número
+        muestra cuántas horas elegiste.
       </p>
     </div>
   );

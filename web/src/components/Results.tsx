@@ -13,22 +13,22 @@ export default function Results() {
     api
       .overlap()
       .then((r) => alive && setData(r))
-      .catch((e) => alive && setError(e instanceof Error ? e.message : 'Failed to load.'))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : 'No se pudo cargar.'))
       .finally(() => alive && setLoading(false));
     return () => {
       alive = false;
     };
   }, []);
 
-  if (loading) return <p className="muted">Loading suggested times…</p>;
+  if (loading) return <p className="muted">Cargando horarios sugeridos…</p>;
   if (error) return <p className="error-text">{error}</p>;
   if (!data || data.slots.length === 0) {
     return (
       <div className="empty-state">
-        <p>No availability yet.</p>
+        <p>Aún no hay disponibilidad.</p>
         <p className="muted">
-          Once people mark when they’re free, the best times to gather show up
-          here.
+          Cuando las personas indiquen cuándo están disponibles, los mejores
+          horarios para reunirse aparecerán aquí.
         </p>
       </div>
     );
@@ -48,8 +48,8 @@ export default function Results() {
       <div className="results-summary card">
         <p className="results-lede">
           {unanimous.length > 0
-            ? `Everyone (${totalUsers}) is free at these times:`
-            : `Best overlap so far — ${best} of ${totalUsers} people:`}
+            ? `Todos (${totalUsers}) están disponibles en estos horarios:`
+            : `Mejor coincidencia hasta ahora: ${best} de ${totalUsers} personas:`}
         </p>
         <ul className="slot-list">
           {highlight.map((s) => (
@@ -69,7 +69,7 @@ export default function Results() {
 
       {rest.length > 0 && (
         <div className="results-rest">
-          <h3 className="section-subtitle">Other times people are free</h3>
+          <h3 className="section-subtitle">Otros horarios en que hay disponibilidad</h3>
           <ul className="slot-list">
             {rest.map((s) => (
               <li key={`${s.date}-${s.hour}`} className="slot-row">

@@ -25,9 +25,9 @@ export default function Login({ onSignedIn }: Props) {
       if (err instanceof ApiError && err.needsName) {
         // The code was the participant code but a name is required.
         setNeedsName(true);
-        setError('Enter your name to continue.');
+        setError('Ingresa tu nombre para continuar.');
       } else {
-        setError(err instanceof Error ? err.message : 'Something went wrong.');
+        setError(err instanceof Error ? err.message : 'Algo salió mal.');
       }
     } finally {
       setBusy(false);
@@ -37,20 +37,20 @@ export default function Login({ onSignedIn }: Props) {
   return (
     <div className="login-screen">
       <form className="card login-card" onSubmit={submit}>
-        <h1 className="login-title">When are you free?</h1>
+        <h1 className="login-title">¿Cuándo estás disponible?</h1>
         <p className="login-sub">
-          Enter the code you were given to help pick a time for the event.
+          Ingresa el código que te dieron para ayudar a elegir la fecha del evento.
         </p>
 
         <label className="field">
-          <span className="field-label">Access code</span>
+          <span className="field-label">Código de acceso</span>
           <input
             className="input"
             type="text"
             inputMode="text"
             autoCapitalize="characters"
             autoComplete="one-time-code"
-            placeholder="e.g. JULY2026"
+            placeholder="ej. JULY2026"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             autoFocus
@@ -59,12 +59,12 @@ export default function Login({ onSignedIn }: Props) {
 
         {needsName && (
           <label className="field">
-            <span className="field-label">Your name</span>
+            <span className="field-label">Tu nombre</span>
             <input
               className="input"
               type="text"
               autoComplete="name"
-              placeholder="How should we list you?"
+              placeholder="¿Cómo quieres aparecer?"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -74,11 +74,11 @@ export default function Login({ onSignedIn }: Props) {
         {error && <p className="error-text">{error}</p>}
 
         <button className="btn btn-primary btn-block" type="submit" disabled={busy}>
-          {busy ? 'Checking…' : 'Continue'}
+          {busy ? 'Verificando…' : 'Continuar'}
         </button>
 
         <p className="login-hint">
-          Have an organizer code? Enter it here to open the dashboard.
+          ¿Tienes un código de organizador? Ingrésalo aquí para abrir el panel.
         </p>
       </form>
     </div>

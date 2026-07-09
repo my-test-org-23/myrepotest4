@@ -41,7 +41,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const data = text ? JSON.parse(text) : {};
 
   if (!res.ok) {
-    throw new ApiError(res.status, data.error || `Request failed (${res.status})`, data.needsName);
+    throw new ApiError(res.status, data.error || `La solicitud falló (${res.status})`, data.needsName);
   }
   return data as T;
 }

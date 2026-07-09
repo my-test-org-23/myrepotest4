@@ -75,7 +75,7 @@ export default function App() {
   if (restoring || !meta) {
     return (
       <div className="app-loading">
-        <p className="muted">Loading…</p>
+        <p className="muted">Cargando…</p>
       </div>
     );
   }
@@ -89,15 +89,15 @@ export default function App() {
       <header className="app-header">
         <div className="app-header-inner">
           <div className="app-title-block">
-            <p className="app-eyebrow">Scheduling</p>
+            <p className="app-eyebrow">Programación</p>
             <h1 className="app-title">{meta.event.title}</h1>
             <p className="app-sub">
               {monthName(meta.event.month)} {meta.event.year}
-              {session.name ? ` · ${session.name}` : session.isAdmin ? ' · Organizer' : ''}
+              {session.name ? ` · ${session.name}` : session.isAdmin ? ' · Organizador' : ''}
             </p>
           </div>
           <button type="button" className="btn btn-ghost btn-small" onClick={handleLogout}>
-            Sign out
+            Cerrar sesión
           </button>
         </div>
       </header>
@@ -122,7 +122,7 @@ export default function App() {
                 className={`tab${tab === 'calendar' ? ' tab-active' : ''}`}
                 onClick={() => setTab('calendar')}
               >
-                My availability
+                Mi disponibilidad
               </button>
               <button
                 role="tab"
@@ -130,7 +130,7 @@ export default function App() {
                 className={`tab${tab === 'results' ? ' tab-active' : ''}`}
                 onClick={() => setTab('results')}
               >
-                Suggested times
+                Horarios sugeridos
               </button>
             </nav>
 
@@ -149,8 +149,8 @@ export default function App() {
 
       <footer className="app-footer">
         <p className="muted small">
-          Pick every hour you could make it. We’ll find the times that work for
-          the most people.
+          Elige todas las horas en las que podrías asistir. Encontraremos los
+          horarios que funcionen para la mayoría.
         </p>
       </footer>
     </div>
