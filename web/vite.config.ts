@@ -10,7 +10,7 @@ export default defineConfig({
     // host: true binds to 0.0.0.0 so other machines on the LAN can reach the
     // dev server. It proxies /api to the API running on this same machine.
     host: true,
-    port: 5173,
+    port: 5180,
     proxy: {
       '/api': {
         target: 'http://localhost:4000',

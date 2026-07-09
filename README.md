@@ -48,13 +48,13 @@ cp .env.example .env      # optional; defaults work out of the box
 npm install
 npm run dev
 
-# Terminal 2 — web on :5173
+# Terminal 2 — web on :5180
 cd web
 npm install
 npm run dev
 ```
 
-Open http://localhost:5173.
+Open http://localhost:5180.
 
 - Participant: code `JULY2026`, then enter any name.
 - Admin dashboard: code `ADMIN2026`.
@@ -69,7 +69,7 @@ same Wi-Fi/LAN can reach them:
 - The **API** prints its LAN URL on startup, e.g.
   `Network: http://192.168.1.42:4000`.
 - The **Vite dev server** (`host: true`) prints a `Network:` URL too — open that
-  from your phone/other laptop, e.g. `http://192.168.1.42:5173`. It proxies
+  from your phone/other laptop, e.g. `http://192.168.1.42:5180`. It proxies
   `/api` to the API on the host machine, so no extra setup is needed.
 
 Find the host's IP with `ipconfig getifaddr en0` (macOS) or `hostname -I`
