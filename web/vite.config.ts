@@ -7,6 +7,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
+    // host: true binds to 0.0.0.0 so other machines on the LAN can reach the
+    // dev server. It proxies /api to the API running on this same machine.
+    host: true,
     port: 5173,
     proxy: {
       '/api': {
@@ -14,6 +17,10 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+  },
+  preview: {
+    host: true,
+    port: 4173,
   },
   build: {
     outDir: 'dist',

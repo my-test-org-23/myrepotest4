@@ -11,6 +11,10 @@ dotenv.config();
 export const config = {
   port: parseInt(process.env.PORT || '4000', 10),
 
+  // Network interface to bind to. Default 0.0.0.0 so other machines on the LAN
+  // can reach the API/site. Set HOST=127.0.0.1 to restrict to this machine.
+  host: process.env.HOST || '0.0.0.0',
+
   // Shared code that any participant types to sign in and set their name.
   accessCode: (process.env.ACCESS_CODE || 'JULY2026').trim(),
 

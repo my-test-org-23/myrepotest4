@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import express from 'express';
 import cors from 'cors';
 import { config } from './config';
@@ -30,10 +31,26 @@ if (fs.existsSync(publicDir)) {
   });
 }
 
-app.listen(config.port, () => {
-  // eslint-disable-next-line no-console
+/** First non-internal IPv4 address, so we can print a shareable LAN URL. */
+function lanAddress(): string | null {
+  for (const iface of Object.values(os.networkInterfaces())) {
+    for (const net of iface || []) {
+      if (net.family === 'IPv4' && !net.internal) return net.address;
+    }
+  }
+  return null;
+}
+
+app.listen(config.port, config.host, () => {
+  const lan = lanAddress();
+  /* eslint-disable no-console */
   console.log(
-    `Availability scheduler API listening on :${config.port} ` +
+    `Availability scheduler API listening on ${config.host}:${config.port} ` +
       `(event "${config.event.title}", ${config.event.year}-${config.event.month})`
   );
+  console.log(`  Local:   http://localhost:${config.port}`);
+  if (config.host === '0.0.0.0' && lan) {
+    console.log(`  Network: http://${lan}:${config.port}  (reachable from other machines on your LAN)`);
+  }
+  /* eslint-enable no-console */
 });

@@ -61,6 +61,21 @@ Open http://localhost:5173.
 
 (Change these via the env vars below before going public.)
 
+### Accessing it from other machines / phones on your network
+
+Both servers bind to all interfaces (`0.0.0.0`) by default, so anything on the
+same Wi-Fi/LAN can reach them:
+
+- The **API** prints its LAN URL on startup, e.g.
+  `Network: http://192.168.1.42:4000`.
+- The **Vite dev server** (`host: true`) prints a `Network:` URL too — open that
+  from your phone/other laptop, e.g. `http://192.168.1.42:5173`. It proxies
+  `/api` to the API on the host machine, so no extra setup is needed.
+
+Find the host's IP with `ipconfig getifaddr en0` (macOS) or `hostname -I`
+(Linux). If you can't connect, allow the ports through the host firewall (or, to
+keep it local-only, set `HOST=127.0.0.1`).
+
 ---
 
 ## Configuration (env vars, read by the API)
@@ -68,6 +83,7 @@ Open http://localhost:5173.
 | Variable          | Default             | Purpose                                       |
 | ----------------- | ------------------- | --------------------------------------------- |
 | `PORT`            | `4000`              | Port the API listens on                       |
+| `HOST`            | `0.0.0.0`           | Bind address; `0.0.0.0` = LAN, `127.0.0.1` = local only |
 | `ACCESS_CODE`     | `JULY2026`          | Code participants type to sign in             |
 | `ADMIN_CODE`      | `ADMIN2026`         | Code that unlocks the admin dashboard         |
 | `EVENT_TITLE`     | `Team Get-Together` | Name shown at the top                         |
