@@ -16,6 +16,7 @@ server/data/
 # Env
 .env
 .env.local
+.env.production
 
 # Logs / OS
 *.log

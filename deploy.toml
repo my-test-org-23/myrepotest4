@@ -1,0 +1,15 @@
+# Per-project deploy manifest, read by the /deploy-production skill.
+# Only project-specific facts live here — infra (VPS, base domain) is global.
+
+name = "scheduler"      # -> deployed at https://scheduler.<BASE_DOMAIN> by default
+port = 4000             # the port the app listens on (Caddy proxies to it)
+
+# The service runs from server/, which serves the built SPA + API together.
+workdir = "server"
+start = "node dist/index.js"
+
+# Local, gitignored secrets file shipped as the systemd EnvironmentFile.
+env_file = ".env.production"
+
+# To pin a full custom domain instead of the <name>.<base-domain> default:
+# domain = "schedule.example.com"

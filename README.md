@@ -96,7 +96,39 @@ keep it local-only, set `HOST=127.0.0.1`).
 
 ---
 
-## Deploy to a VPS (with HTTPS)
+## One-command deploy (`/deploy-production` skill)
+
+This repo ships a reusable Claude Code skill at
+`.claude/skills/deploy-production/` that deploys the app to your VPS over SSH —
+building it there, running it as a systemd service, and exposing it via Caddy
+(automatic HTTPS) at its configured domain.
+
+The point: **infrastructure facts live once, globally** — your VPS host, base
+domain and paths go in `~/.config/agent-deploy/config.env` (+ a `~/.ssh/config`
+alias), never in any project. Each project only carries a small `deploy.toml`:
+
+```toml
+name = "scheduler"     # -> https://scheduler.<BASE_DOMAIN> by default
+port = 4000
+workdir = "server"
+start = "node dist/index.js"
+env_file = ".env.production"   # gitignored secrets, shipped as the service env
+# domain = "schedule.example.com"   # optional full-domain override
+```
+
+**One-time setup** (install the skill globally + bootstrap the VPS) is documented
+in `.claude/skills/deploy-production/SETUP.md`. After that, from any project:
+
+```
+/deploy-production
+```
+
+Copy the skill into `~/.claude/skills/` to make it available in **every** project
+(not just this one) — see SETUP.md. Put production secrets in `.env.production`
+(copy from `.env.production.example`); it's gitignored and shipped to the VPS as
+the systemd `EnvironmentFile`.
+
+## Deploy to a VPS manually (with HTTPS)
 
 1. **Build everything** (compiles the API and bundles the frontend into
    `server/public`, so one process serves both):
